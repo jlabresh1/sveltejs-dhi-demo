@@ -20,6 +20,4 @@ const createLocalStore = (key, startValue) => {
   };
 };
 
-const THEME_KEY = 'theme';
-const THEME_VALUE = 'light';
-export const themeStore = createLocalStore(THEME_KEY, THEME_VALUE);
+export const lightTheme = createLocalStore('theme', true);
