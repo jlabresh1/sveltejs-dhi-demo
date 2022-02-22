@@ -1,40 +1,51 @@
 <script>
+  import Editor from "./Editor.svelte";
   import Button from "./lib/Button.svelte";
-  import { themeStore } from "./stores/themeStore.js";
-  themeStore.useLocalStorage();
+  import { lightTheme } from "./stores/themeStore.js";
+  lightTheme.useLocalStorage();
 
-  $: theme = $themeStore === "dark" ? "light" : "dark";
+  $: $lightTheme ? document.body.classList.remove('dark-mode'): document.body.classList.add('dark-mode');
+  $: themeIcon = $lightTheme ? '🌙' : '🌞';
+  const toggleTheme = () => $lightTheme = !$lightTheme;
 
-  function toggleTheme() {
-    $themeStore === "dark" ? ($themeStore = "light") : ($themeStore = "dark");
-  }
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
+<!-- 
+  Prupose of Demo:
+  1. Components and slots - <Button>
+  2. stores
+  3. dynamic values with $:
+ -->
 
-<main class:dark-mode={$themeStore === 'dark'}>
+
+<main >
   <header>
 
-    <Button on:click={toggleTheme}>{theme} theme</Button>
+    <Button on:click={toggleTheme}>{themeIcon} Toggle theme</Button>
+    <h1>SveltJS Demo</h1>
     
   </header>
 
   <section>
 
-    <h1>SveltJS {$themeStore}</h1>
 
     
 
-
+  <Editor />
 
   </section>
 </main>
 
 
 <style>
+
+header {
+    text-align: center;
+}
   section {
     display: flex;
     flex-direction: column;
@@ -47,17 +58,15 @@
     width: 100%;
   }
 
-  main {
+  :global(body) {
     background-color: #fefefe;
     color: #1d3040;
     transition: all 0.3s;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    padding: 2rem;
-    text-align: center;
   }
 
-  main.dark-mode {
+  :global(body.dark-mode) {
     background-color: #1d3040;
     color: #fefefe;
   }
