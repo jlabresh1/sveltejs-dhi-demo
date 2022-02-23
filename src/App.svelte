@@ -1,7 +1,10 @@
 <script>
-  import Editor from "./Editor.svelte";
+  import Accordion from "./lib/Accordion.svelte";
+  import Editor from "./lib/Editor.svelte";
   import Button from "./lib/Button.svelte";
   import { lightTheme } from "./stores/themeStore.js";
+  import {faqs} from './faqs.js';
+
   lightTheme.useLocalStorage();
 
   $: $lightTheme ? document.body.classList.remove('dark-mode'): document.body.classList.add('dark-mode');
@@ -35,7 +38,9 @@
 
     
 
-  <Editor />
+
+  <Accordion {faqs} />
+  <!-- <Editor /> -->
 
   </section>
 </main>
