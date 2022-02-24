@@ -1,10 +1,13 @@
 <script>
+  import Modal from "./lib/Modal.svelte";
   import Accordion from "./lib/Accordion.svelte";
   import Editor from "./lib/Editor.svelte";
   import TypeGame from "./lib/TypeGame.svelte";
   import Button from "./lib/Button.svelte";
   import { lightTheme } from "./stores/themeStore.js";
   import {faqs} from './faqs.js';
+
+  let showModal = false;
 
   lightTheme.useLocalStorage();
 
@@ -43,6 +46,17 @@
   <!-- <Accordion {faqs} /> -->
   <!-- <Editor /> -->
   <TypeGame />
+
+
+  <Button on:click={() => showModal = true}>modal</Button>
+
+  <Modal {showModal} on:cancel={() => showModal = false} on:close={() => showModal=false}>
+    <div slot="header">Modal Header</div>
+
+    <h3>This is a modal</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices auctor purus, et volutpat nisi interdum non. Nam efficitur lectus non euismod volutpat. Praesent in urna risus.</p>
+
+  </Modal>
 
   </section>
 </main>
