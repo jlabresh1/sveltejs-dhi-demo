@@ -1,6 +1,6 @@
 <script>
   import { list } from '../wordList';
-  const GAME_LENGTH_IN_SECONDS = 10;
+  const GAME_LENGTH_IN_SECONDS = 60;
   let word = ''
   let points = 0;
   let letters = []; // array of {l: string, typed: boolean}
@@ -92,15 +92,18 @@
 </div>
 
 <style>
+  .wrapper {
+    text-align: center;
+  }
   .words {
     font-size: 3rem;
 		letter-spacing: .1rem;
   }
 	
-.span {
-  background-color: lightcyan;
-}
-.bg {
-  background-color: pink;
-}
+  .span {
+    background-color: lightcyan;
+  }
+  .bg {
+    background-color: pink;
+  }
 </style>
