@@ -1,9 +1,9 @@
 
 <script>
-
+  export let disabled = false;
 </script>
 
-<button on:click>
+<button {disabled} on:click>
 	<slot />
 </button>
 
@@ -15,5 +15,9 @@
     padding: 1rem 2rem;
     color: orange;
     cursor: pointer;
+  }
+  button[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
   }
 </style>

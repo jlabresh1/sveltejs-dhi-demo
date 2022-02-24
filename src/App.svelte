@@ -29,7 +29,7 @@
 <main >
   <header>
 
-    <Button on:click={toggleTheme}>{themeIcon} Toggle theme</Button>
+    <Button on:click={toggleTheme}>{themeIcon} &nbsp;  Toggle theme</Button>
     <h1>SveltJS Demo</h1>
     
   </header>
