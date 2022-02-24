@@ -1,5 +1,6 @@
 <script>
   import Button from './Button.svelte';
+  import Modal from './Modal.svelte';
   import { list } from '../wordList';
   const GAME_LENGTH_IN_SECONDS = 60;
   let points = 0;
@@ -9,20 +10,16 @@
   let seconds = GAME_LENGTH_IN_SECONDS;
   let isDisabled = false;
   let timer = null;
-
-  function initGame() {
-    points = 0;
-    seconds = GAME_LENGTH_IN_SECONDS;
-    isDisabled = false;	
-  }
+  let showModal = false;
 
   function countdown() {
     timer = setInterval(() => {
       isDisabled = true;
       seconds--;
       if (seconds === 0) {
-        alert("Game over! Your score is " + points);
-        initGame();
+        showModal = true;
+        seconds = GAME_LENGTH_IN_SECONDS;
+        isDisabled = false;	
         clearInterval(timer);
       }
      }, 1000);
@@ -35,6 +32,7 @@
     }
 
     function handleClick(e) {
+      points = 0;
       countdown();
       random();
       isDisabled = true;
@@ -87,6 +85,21 @@
     </p>
   </div>
 </div>
+
+
+
+  <Modal {showModal} 
+    on:cancel={() => showModal = false} 
+    on:close={() => showModal=false}
+  >
+    <div slot="header">Game Over</div>
+
+    <h3>Great work!</h3>
+    <p>
+      Your score is {points}
+    </p>
+
+  </Modal>
 
 <style>
   .wrapper {
