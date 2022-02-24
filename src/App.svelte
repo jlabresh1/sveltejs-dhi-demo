@@ -1,6 +1,7 @@
 <script>
   import Accordion from "./lib/Accordion.svelte";
   import Editor from "./lib/Editor.svelte";
+  import TypeGame from "./lib/TypeGame.svelte";
   import Button from "./lib/Button.svelte";
   import { lightTheme } from "./stores/themeStore.js";
   import {faqs} from './faqs.js';
@@ -28,7 +29,7 @@
 <main >
   <header>
 
-    <Button on:click={toggleTheme}>{themeIcon} Toggle theme</Button>
+    <Button on:click={toggleTheme}>{themeIcon} &nbsp;  Toggle theme</Button>
     <h1>SveltJS Demo</h1>
     
   </header>
@@ -39,8 +40,9 @@
     
 
 
-  <Accordion {faqs} />
+  <!-- <Accordion {faqs} /> -->
   <!-- <Editor /> -->
+  <TypeGame />
 
   </section>
 </main>

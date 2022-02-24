@@ -1,7 +1,7 @@
 <script>
+  import Button from './Button.svelte';
   import { list } from '../wordList';
-  const GAME_LENGTH_IN_SECONDS = 10;
-  let word = ''
+  const GAME_LENGTH_IN_SECONDS = 60;
   let points = 0;
   let letters = []; // array of {l: string, typed: boolean}
   let currentLetterIndex = 0;
@@ -12,8 +12,6 @@
 
   function initGame() {
     points = 0;
-    isDisabled = false;
-    clearInterval(timer);
     seconds = GAME_LENGTH_IN_SECONDS;
     isDisabled = false;	
   }
@@ -25,12 +23,12 @@
       if (seconds === 0) {
         alert("Game over! Your score is " + points);
         initGame();
+        clearInterval(timer);
       }
      }, 1000);
     }
 
     function random() {
-      word = '';
       const random = Math.floor(Math.random() * (1943 - 0 + 1)) + 0;
       const wordArray = list[random].split("");
       letters = wordArray.map(l => ({l, typed: false}))
@@ -70,7 +68,7 @@
 
 <div class="wrapper">
   <p>Type as many words as you can until time runs out!</p>
-  <button disabled={isDisabled} on:click={handleClick}>start</button>
+  <Button disabled={isDisabled} on:click={handleClick}>Start</Button>
   <div class="outerWrap">
     <div class="scoreWrap">
       <p>Score</p>
@@ -82,7 +80,6 @@
     </div>
   </div>
   <div class="wordsWrap">
-    <p class="words">{word}</p>
     <p class="words">
       {#each letters as letter, i}
         <span class={`span`} class:bg={letter.typed}>{letter.l}</span>
@@ -92,15 +89,18 @@
 </div>
 
 <style>
+  .wrapper {
+    text-align: center;
+  }
   .words {
     font-size: 3rem;
 		letter-spacing: .1rem;
   }
 	
-.span {
-  background-color: lightcyan;
-}
-.bg {
-  background-color: pink;
-}
+  .span {
+    background-color: lightcyan;
+  }
+  .bg {
+    background-color: pink;
+  }
 </style>
